@@ -137,6 +137,33 @@ void loop()
   Serial.print(" ");
   Serial.print(bottomright);
   Serial.print('\n');
+
+  
+  int datareq = Serial.read();
+  if(datareq == 1)
+  {
+    Serial.write(topleft);
+  }
+  else if (datareq == 2)
+  {
+    Serial.write(topright);
+  }
+  else if (datareq == 3)
+  {
+    Serial.write(bottomleft);
+  }
+  else if (datareq == 4)
+  {
+    Serial.write(bottomright);
+  }
+  else if (datareq == 5)
+  {
+    Serial.write(servov);
+  }
+  else if (datareq == 6)
+  {
+    Serial.write(servoh);
+  }
 }
 
 
