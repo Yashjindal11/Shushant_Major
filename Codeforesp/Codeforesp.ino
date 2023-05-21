@@ -5,6 +5,9 @@
 const char* ssid = "Yash";
 const char* password = "123456789";
 
+const char* blynkssid = "Yash";
+const char* blynkpassword = "Yash1234";
+
 #define BLYNK_AUTH_TOKEN "mMO_zyr7DKuxfEzndOWN727hYoS0dQzM"
 
 #define RX_PIN 3
@@ -14,8 +17,8 @@ void setup()
 {
   Serial.begin(115200);
   Serial.println();
-  pinMode(1,OUTPUT);
-  pinMode(3,INPUT);
+  pinMode(TX_PIN,OUTPUT);
+  pinMode(RX_PIN,INPUT);
   WiFi.begin(ssid, password);
 
   Serial.print("Connecting");
@@ -28,13 +31,14 @@ void setup()
 
   Serial.print("Connected");
 
-  Blynk.begin(BLYNK_AUTH_TOKEN, ssid, password);
+  Blynk.begin(BLYNK_AUTH_TOKEN, blynkssid, blynkpassword);
   Serial.println("Connected to Blynk");
 }
 
 void loop ()
 {
   Blynk.run();
+  Serial.write(0);
 
   Serial.write(1);
   while(!Serial.available());
@@ -72,18 +76,5 @@ void loop ()
   Serial.print(" ");
   Serial.print(servohangle);
   Serial.print(" ");
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
