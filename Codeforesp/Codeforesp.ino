@@ -5,8 +5,6 @@
 const char* ssid = "Yash";
 const char* password = "123456789";
 
-#define BLYNK_TEMPLATE_ID "TMPL3hssOhSA9"
-#define BLYNK_TEMPLATE_NAME "Solar Tracker"
 #define BLYNK_AUTH_TOKEN "mMO_zyr7DKuxfEzndOWN727hYoS0dQzM"
 
 #define RX_PIN 3
@@ -16,7 +14,8 @@ void setup()
 {
   Serial.begin(115200);
   Serial.println();
-
+  pinMode(1,OUTPUT);
+  pinMode(3,INPUT);
   WiFi.begin(ssid, password);
 
   Serial.print("Connecting");
