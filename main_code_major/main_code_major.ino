@@ -1,6 +1,9 @@
 #include <Servo.h>
 #include <SoftwareSerial.h>
 
+#define TX_PIN 1
+#define RX_PIN 0
+
 Servo hori;
 Servo verti;
 int servoh = 90;
@@ -33,6 +36,9 @@ void setup()
   digitalWrite(3, HIGH);
   pinMode(2, OUTPUT);
   digitalWrite(2, HIGH);
+
+  pinMode(TX_PIN, OUTPUT);
+  pinMode(RX_PIN, INPUT);
 }
 
 void loop()
@@ -142,19 +148,19 @@ void loop()
   int datareq = Serial.read();
   if(datareq == 1)
   {
-    Serial.write(topleft);
+    Serial.write(topleft/4);
   }
   else if (datareq == 2)
   {
-    Serial.write(topright);
+    Serial.write(topright/4);
   }
   else if (datareq == 3)
   {
-    Serial.write(bottomleft);
+    Serial.write(bottomleft/4);
   }
   else if (datareq == 4)
   {
-    Serial.write(bottomright);
+    Serial.write(bottomright/4);
   }
   else if (datareq == 5)
   {

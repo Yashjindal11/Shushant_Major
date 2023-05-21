@@ -2,19 +2,22 @@
 #include <SoftwareSerial.h>
 #include <BlynkSimpleEsp8266.h>
 
+const char* ssid = "Yash";
+const char* password = "123456789";
+
 #define BLYNK_TEMPLATE_ID "TMPL3hssOhSA9"
 #define BLYNK_TEMPLATE_NAME "Solar Tracker"
 #define BLYNK_AUTH_TOKEN "mMO_zyr7DKuxfEzndOWN727hYoS0dQzM"
 
-#define RX (3)
-#define TX (1)
+#define RX_PIN 3
+#define TX_PIN 1
 
 void setup()
 {
   Serial.begin(115200);
   Serial.println();
 
-  WiFi.begin("Yash", "123456789");
+  WiFi.begin(ssid, password);
 
   Serial.print("Connecting");
   while (WiFi.status() != WL_CONNECTED)
@@ -24,12 +27,16 @@ void setup()
   }
   Serial.println();
 
-  Serial.print("Connected, IP address: ");
-  Serial.println(WiFi.localIP());
+  Serial.print("Connected");
+
+  Blynk.begin(BLYNK_AUTH_TOKEN, ssid, password);
+  Serial.println("Connected to Blynk");
 }
 
 void loop ()
 {
+  Blynk.run();
+
   Serial.write(1);
   while(!Serial.available());
   int topleft = Serial.read();
@@ -52,5 +59,32 @@ void loop ()
 
   Serial.write(6);
   while(!Serial.available());
-  int Servohangle = Serial.read();
+  int servohangle = Serial.read();
+
+  Serial.print(topleft);
+  Serial.print(" ");
+  Serial.print(topright);
+  Serial.print(" ");
+  Serial.print(bottomleft);
+  Serial.print(" ");
+  Serial.print(bottomright);
+  Serial.print(" ");
+  Serial.print(servovangle);
+  Serial.print(" ");
+  Serial.print(servohangle);
+  Serial.print(" ");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
