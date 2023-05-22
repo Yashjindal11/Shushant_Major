@@ -1,8 +1,11 @@
 #include <Servo.h>
 #include <SoftwareSerial.h>
 
-#define TX_PIN 1
-#define RX_PIN 0
+
+#define TX_PIN 6
+#define RX_PIN 5
+
+SoftwareSerial mySerial (RX_PIN, TX_PIN);
 
 Servo hori;
 Servo verti;
@@ -22,7 +25,7 @@ int ldrbottomright = 3;
 void setup()
 {
   Serial.begin(9600);
-
+  mySerial.begin(9600);
   hori.attach(9);
   verti.attach(10);
   hori.write(servoh);
@@ -144,32 +147,47 @@ void loop()
   Serial.print(bottomright);
   Serial.print('\n');
 
-  
-  int datareq = Serial.read();
+
+  int datareq = mySerial.read();
+  Serial.print("datareq = ");
+  Serial.print(datareq);
+  Serial.print(" ");
   if(datareq == 1)
   {
-    Serial.write(topleft/4);
+    int x = topleft/4;
+    mySerial.write(x);
+    Serial.print(x);
   }
   else if (datareq == 2)
   {
-    Serial.write(topright/4);
+    int x = topright/4;
+    mySerial.write(x);
+    Serial.print(x);
   }
   else if (datareq == 3)
   {
-    Serial.write(bottomleft/4);
+    int x = bottomleft/4;
+    mySerial.write(x);
+    Serial.print(x);
   }
   else if (datareq == 4)
   {
-    Serial.write(bottomright/4);
+    int x = bottomright/4;
+    mySerial.write(x);
+    Serial.print(x);
   }
   else if (datareq == 5)
   {
-    Serial.write(servov);
+    mySerial.write(servov);
+    Serial.print(servov);
   }
   else if (datareq == 6)
   {
-    Serial.write(servoh);
+    mySerial.write(servoh);
+    Serial.print(servoh);
   }
+
+  
 }
 
 
